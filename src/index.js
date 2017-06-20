@@ -4,16 +4,31 @@ import axios from 'axios'
 //import App from './App';
 //import registerServiceWorker from './registerServiceWorker';
 //import './index.css';
-//
+import UsersList from './components/UsersList';
+
 class App extends Component {
+  // eslint-disable-next-line
   constructor() {
     super()
+    this.state = {
+      users: [],
+      data: {}
+
+    }
+  }
+
+  componentDidMount() {
+    this.getUsers()
   }
 
   getUsers() {
     axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
-    .then((res) => {console.log(res)})
-    .catch((err) => {console.log(res)})
+    .then((res) => {
+      this.setState({
+        users: res.data.data.users
+      })
+    })
+    .catch((err) => { console.log(err);} )
   }
     
   render() {
@@ -23,6 +38,8 @@ class App extends Component {
             <div className="col-md-4">
               <br/>
               <h1>All Users</h1>
+              <hr/><br/>
+              <UsersList users={ this.state.users } />
             </div>
           </div>
         </div>
