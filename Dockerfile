@@ -17,7 +17,7 @@ ENV REACT_APP_USERS_SERVICE_URL $REACT_APP_USERS_SERVICE_URL
 ADD package.json /usr/src/app/pageck.json
 RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install
-RUN yarn add pushstate-server -g
+RUN yarn global add pushstate-server 
 
 # add app
 ADD . /usr/src/app
