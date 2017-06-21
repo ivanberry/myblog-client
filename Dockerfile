@@ -9,6 +9,7 @@ ENV PATH /usr/src/app/node_module/.bon:$PATH
 
 # install and cache app dependencies
 ADD package.json /usr/src/app/pageck.json
+RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install
 RUN npm install react-scripts -g
 
