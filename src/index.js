@@ -5,15 +5,14 @@ import axios from 'axios'
 //import registerServiceWorker from './registerServiceWorker';
 //import './index.css';
 import UsersList from './components/UsersList';
+import AddUser from './components/AddUser';
 
 class App extends Component {
   // eslint-disable-next-line
   constructor() {
     super()
     this.state = {
-      users: [],
-      data: {}
-
+      users: []
     }
   }
 
@@ -38,6 +37,8 @@ class App extends Component {
             <div className="col-md-4">
               <br/>
               <h1>All Users</h1>
+              <hr/><br/>
+              <AddUser/>
               <hr/><br/>
               <UsersList users={ this.state.users } />
             </div>
