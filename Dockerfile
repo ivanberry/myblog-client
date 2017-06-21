@@ -5,7 +5,7 @@ RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 
 # add `/usr/src/app/node_module/.bin` to $PATH
-ENV PATH /usr/src/app/node_module/.bon:$PATH
+ENV PATH /usr/src/app/node_module/.bin:$PATH
 
 # add env variables
 ARG REACT_APP_USERS_SERVICE_URL
