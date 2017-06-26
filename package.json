@@ -8,6 +8,7 @@
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
+    "jest": "^20.0.4",
     "react-scripts": "1.0.7"
   },
   "scripts": {

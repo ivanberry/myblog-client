@@ -4,8 +4,8 @@ import axios from 'axios'
 //import App from './App';
 //import registerServiceWorker from './registerServiceWorker';
 //import './index.css';
-import UsersList from './components/UsersList';
-import AddUser from './components/AddUser';
+import UsersList from './components/User/UsersList';
+import AddUser from './components/User/AddUser';
 
 class App extends Component {
   // eslint-disable-next-line
