@@ -14,7 +14,8 @@ class App extends Component {
     this.state = {
       users: [],
       username: '',
-      email: ''
+      email: '',
+      passwrod: ''
     }
   }
 
@@ -34,7 +35,8 @@ class App extends Component {
       this.getUsers();
       this.setState({
         username: '',
-        email: ''
+        email: '',
+        passwrod: ''
       });
     })
     .catch((err) => {
