@@ -15,7 +15,7 @@ class App extends Component {
       users: [],
       username: '',
       email: '',
-      passwrod: ''
+      password: ''
     }
   }
 
