@@ -28,7 +28,7 @@ class App extends Component {
     const data = {
       email: this.state.email,
       username: this.state.username,
-      passwrod: this.state.password
+      password: this.state.password
     };
 
     axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
@@ -37,7 +37,7 @@ class App extends Component {
       this.setState({
         username: '',
         email: '',
-        passwrod: ''
+        password: ''
       });
     })
     .catch((err) => {
@@ -73,6 +73,7 @@ class App extends Component {
                 addUser={ this.addUser.bind(this) }
                 email={ this.state.email }
                 username={ this.state.username }
+                password={ this.state.password }
                 handleChange = { this.handleChange.bind(this) }
               />
               <hr/><br/>
