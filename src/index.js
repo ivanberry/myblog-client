@@ -28,7 +28,7 @@ class App extends Component {
     const data = {
       email: this.state.email,
       username: this.state.username,
-      passwrod: this.state.passwrod
+      passwrod: this.state.password
     };
 
     axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
