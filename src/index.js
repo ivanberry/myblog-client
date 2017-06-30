@@ -27,7 +27,8 @@ class App extends Component {
     event.preventDefault();
     const data = {
       email: this.state.email,
-      username: this.state.username
+      username: this.state.username,
+      passwrod: this.state.passwrod
     };
 
     axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
