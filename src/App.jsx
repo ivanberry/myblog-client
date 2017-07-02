@@ -7,6 +7,8 @@ import axios from 'axios';
 import UsersList from './components/User/UsersList';
 import AddUser from './components/User/AddUser';
 import About from './components/About';
+import NavBar from './components/NavBar';
+import Form from './components/Form';
 
 class App extends Component {
     // eslint-disable-next-line
@@ -16,7 +18,13 @@ class App extends Component {
             users: [],
             username: '',
             email: '',
-            password: ''
+            password: '',
+            title: 'shirting.me',
+            formData: {
+                username: '',
+                email: '',
+                password: ''
+            }
         }
     }
 
@@ -64,28 +72,38 @@ class App extends Component {
 
     render() {
         return (
-            <div className="contaienr">
-                <div className="row">
-                    <div className="col-md-4">
-                        <br />
-                        <Switch>
-                            <Route exact path='/' render={() => (
-                                <div>
-                                    <h1>All Users</h1>
-                                    <hr /><br />
-                                    <AddUser
-                                        addUser={this.addUser.bind(this)}
-                                        email={this.state.email}
-                                        username={this.state.username}
-                                        password={this.state.password}
-                                        handleChange={this.handleChange.bind(this)}
+            <div>
+                <NavBar
+                    title={this.state.title}
+                />
+                <div className="contaienr">
+                    <div className="row">
+                        <div className="col-md-4">
+                            <br />
+                            <Switch>
+                                <Route exact path='/' render={() => (
+                                    <div>
+                                        <h1>All Users</h1>
+                                        <hr /><br />
+                                        <UsersList users={this.state.users} />
+                                    </div>
+                                )} />
+                                <Route exact path='/about' component={About} />
+                                <Route exact path='/register' render={() => (
+                                    <Form
+                                        formType={'Register'}
+                                        formData={this.state.formData}
                                     />
-                                    <br />
-                                    <UsersList users={this.state.users} />
-                                </div>
-                            )} />
-                            <Route exact path='/about' component={About} />
-                        </Switch>
+                                )} />
+                                <Route exact path='/login' render={() => (
+                                    <Form
+                                        formType={'Login'}
+                                        formData={this.state.formData}
+                                    />
+                                )}/>
+                                />
+                            </Switch>
+                        </div>
                     </div>
                 </div>
             </div>
