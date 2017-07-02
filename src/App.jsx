@@ -5,7 +5,7 @@ import axios from 'axios';
 //import registerServiceWorker from './registerServiceWorker';
 //import './index.css';
 import UsersList from './components/User/UsersList';
-import AddUser from './components/User/AddUser';
+// import AddUser from './components/User/AddUser';
 import About from './components/About';
 import NavBar from './components/NavBar';
 import Form from './components/Form';
@@ -54,10 +54,15 @@ class App extends Component {
             });
     }
 
-    handleChange(event) {
-        const obj = {};
+    handleFormUserChange(event) {
+        const obj = this.state.formData;
         obj[event.target.name] = event.target.value; //input name
         this.setState(obj);
+    }
+
+    handleFormSubmit(event) {
+        event.preventDefault();
+        console.log('form submit!');
     }
 
     getUsers() {
@@ -93,12 +98,16 @@ class App extends Component {
                                     <Form
                                         formType={'Register'}
                                         formData={this.state.formData}
+                                        handleUserFromSubmit={this.handleFormSubmit.bind(this)}
+                                        handleFormChange={this.handleFormUserChange.bind(this)}
                                     />
                                 )} />
                                 <Route exact path='/login' render={() => (
                                     <Form
                                         formType={'Login'}
                                         formData={this.state.formData}
+                                        handleUserFromSubmit={this.handleFormSubmit.bind(this)}
+                                        handleFormChange={this.handleFormUserChange.bind(this)}
                                     />
                                 )}/>
                                 />
