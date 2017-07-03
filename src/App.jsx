@@ -62,7 +62,37 @@ class App extends Component {
 
     handleFormSubmit(event) {
         event.preventDefault();
-        console.log('form submit!');
+        const formType = window.location.href.split('/').reverse()[0];
+        let data;
+        if (formType === 'login') {
+            data = {
+                email: this.state.formData.email,
+                password: this.state.formData.password
+            }
+        }
+        if (formType === 'register') {
+            data = {
+                username: this.state.formData.username,
+                email: this.state.formData.email,
+                password: this.state.formData.password
+            }
+        }
+
+        const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${formType}`;
+        axios.post(url, data)
+            .then((res) => {
+                console.log(res.data);
+                this.setState({
+                    formData: {
+                        username: '',
+                        email: '',
+                        password: ''
+                    }
+                });
+        })
+            .catch((err) => {
+                console.log(err);
+        })
     }
 
     getUsers() {
