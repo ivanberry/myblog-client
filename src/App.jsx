@@ -9,6 +9,8 @@ import UsersList from './components/User/UsersList';
 import About from './components/About';
 import NavBar from './components/NavBar';
 import Form from './components/Form';
+import Logout from './components/Logout';
+import UserStatus from './components/UserStatus';
 
 class App extends Component {
     // eslint-disable-next-line
@@ -24,7 +26,8 @@ class App extends Component {
                 username: '',
                 email: '',
                 password: ''
-            }
+            },
+            isAuthenticated: false
         }
     }
 
@@ -82,17 +85,27 @@ class App extends Component {
         axios.post(url, data)
             .then((res) => {
                 console.log(res.data);
+                window.localStorage.setItem('authToken', res.data.auth_token)
                 this.setState({
                     formData: {
                         username: '',
                         email: '',
                         password: ''
-                    }
+                    },
+                    username: '',
+                    email: '',
+                    isAuthenticated: true
                 });
+                this.getUsers();
         })
             .catch((err) => {
                 console.log(err);
         })
+    }
+
+    logoutUser() {
+        window.localStorage.clear();
+        this.setState({ isAuthenticated: false });
     }
 
     getUsers() {
@@ -130,6 +143,7 @@ class App extends Component {
                                         formData={this.state.formData}
                                         handleUserFromSubmit={this.handleFormSubmit.bind(this)}
                                         handleFormChange={this.handleFormUserChange.bind(this)}
+                                        isAuthenticated={this.state.isAuthenticated}
                                     />
                                 )} />
                                 <Route exact path='/login' render={() => (
@@ -138,8 +152,16 @@ class App extends Component {
                                         formData={this.state.formData}
                                         handleUserFromSubmit={this.handleFormSubmit.bind(this)}
                                         handleFormChange={this.handleFormUserChange.bind(this)}
+                                        isAuthenticated={this.state.isAuthenticated}
                                     />
                                 )}/>
+                                <Route exact path='/logout' render={() => (
+                                    <Logout
+                                        logoutUser={this.logoutUser.bind(this)}
+                                        isAuthenticated={this.state.isAuthenticated}
+                                    />
+                                )} />
+                                <Route exact path='/status' component={UserStatus} />
                                 />
                             </Switch>
                         </div>
