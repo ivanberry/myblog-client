@@ -13,6 +13,7 @@ class UserStatus extends Component {
     }
     componentDidMount() {
         this.getUserStatus();
+        console.log(this);
     }
 
     getUserStatus(event) {
@@ -41,10 +42,10 @@ class UserStatus extends Component {
     render() {
         return (
             <div>
-                <li><strong>{this.state.id}</strong></li>
-                <li><strong>{this.state.username}</strong></li>
-                <li><strong>{this.state.created_at}</strong></li>
-                <li><strong>{this.state.email}</strong></li>
+                <li><strong><b>User ID:</b> {this.state.id}</strong></li>
+                <li><strong><b>Username:</b> {this.state.username}</strong></li>
+                <li><strong><b>Email:</b> {this.state.email}</strong></li>
+                <li><strong><b>Created_at:</b> {this.state.created_at}</strong></li>
             </div>
         )
     }
