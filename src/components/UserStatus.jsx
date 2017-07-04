@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class UserStatus extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class UserStatus extends Component {
     }
     componentDidMount() {
         this.getUserStatus();
-        console.log(this);
+        console.log(this.props);
     }
 
     getUserStatus(event) {
@@ -40,12 +41,17 @@ class UserStatus extends Component {
     }
 
     render() {
+        if (!this.props.isAuthenticated) {
+            return (
+                <p>You must log in to view this. Clike <Link to='/login'>Login</Link> to log back!</p>
+            )
+        }
         return (
             <div>
                 <li><strong><b>User ID:</b> {this.state.id}</strong></li>
                 <li><strong><b>Username:</b> {this.state.username}</strong></li>
                 <li><strong><b>Email:</b> {this.state.email}</strong></li>
-                <li><strong><b>Created_at:</b> {this.state.created_at}</strong></li>
+                <li><strong><b>Created Date:</b> {this.state.created_at}</strong></li>
             </div>
         )
     }

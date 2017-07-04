@@ -84,7 +84,6 @@ class App extends Component {
         const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${formType}`;
         axios.post(url, data)
             .then((res) => {
-                console.log(res.data);
                 window.localStorage.setItem('authToken', res.data.auth_token)
                 this.setState({
                     formData: {
@@ -96,6 +95,7 @@ class App extends Component {
                     email: '',
                     isAuthenticated: true
                 });
+                console.log(this.state);
                 this.getUsers();
         })
             .catch((err) => {
