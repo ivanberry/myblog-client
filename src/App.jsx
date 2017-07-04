@@ -123,6 +123,7 @@ class App extends Component {
             <div>
                 <NavBar
                     title={this.state.title}
+                    isAuthenticated={this.state.isAuthenticated}
                 />
                 <div className="contaienr">
                     <div className="row">

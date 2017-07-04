@@ -26,16 +26,26 @@ class UserStatus extends Component {
         };
         return axios(options)
             .then((res => {
-                console.log(res);
-        }))
+                this.setState({
+                    username: res.data.data.username,
+                    email: res.data.data.email,
+                    id: res.data.data.id,
+                    created_at: res.data.data.created_at
+                });
+            }))
             .catch((err) => {
                 console.log(err);
-        })
+            })
     }
 
     render() {
         return (
-            <p>Hye yo</p>
+            <div>
+                <li><strong>{this.state.id}</strong></li>
+                <li><strong>{this.state.username}</strong></li>
+                <li><strong>{this.state.created_at}</strong></li>
+                <li><strong>{this.state.email}</strong></li>
+            </div>
         )
     }
 }
