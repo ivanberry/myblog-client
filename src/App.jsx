@@ -18,15 +18,7 @@ class App extends Component {
         super()
         this.state = {
             users: [],
-            username: '',
-            email: '',
-            password: '',
             title: 'shirting.me',
-            formData: {
-                username: '',
-                email: '',
-                password: ''
-            },
             isAuthenticated: false
         }
     }
@@ -35,68 +27,13 @@ class App extends Component {
         this.getUsers()
     }
 
-    addUser(event) {
-        event.preventDefault();
-        const data = {
-            email: this.state.email,
-            username: this.state.username,
-            password: this.state.password
-        };
-
-        axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
+    getUsers() {
+        let that = this;
+        axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
             .then((res) => {
-                this.getUsers();
-                this.setState({
-                    username: '',
-                    email: '',
-                    password: ''
+                that.setState({
+                    users: res.data.data.users
                 });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
-
-    handleFormUserChange(event) {
-        const obj = this.state.formData;
-        obj[event.target.name] = event.target.value; //input name
-        this.setState(obj);
-    }
-
-    handleFormSubmit(event) {
-        event.preventDefault();
-        const formType = window.location.href.split('/').reverse()[0];
-        let data;
-        if (formType === 'login') {
-            data = {
-                email: this.state.formData.email,
-                password: this.state.formData.password
-            }
-        }
-        if (formType === 'register') {
-            data = {
-                username: this.state.formData.username,
-                email: this.state.formData.email,
-                password: this.state.formData.password
-            }
-        }
-
-        const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${formType}`;
-        axios.post(url, data)
-            .then((res) => {
-                window.localStorage.setItem('authToken', res.data.auth_token)
-                this.setState({
-                    formData: {
-                        username: '',
-                        email: '',
-                        password: ''
-                    },
-                    username: '',
-                    email: '',
-                    isAuthenticated: true
-                });
-                console.log(this.state);
-                this.getUsers();
             })
             .catch((err) => {
                 console.log(err);
@@ -108,14 +45,10 @@ class App extends Component {
         this.setState({ isAuthenticated: false });
     }
 
-    getUsers() {
-        axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
-            .then((res) => {
-                this.setState({
-                    users: res.data.data.users
-                })
-            })
-            .catch((err) => { console.log(err); })
+    loginUser(token) {
+        window.localStorage.setItem('authToken', token);
+        this.setState({ isAuthenticated: true });
+        this.getUsers();
     }
 
     render() {
@@ -137,19 +70,15 @@ class App extends Component {
                                 <Route exact path='/register' render={() => (
                                     <Form
                                         formType={'Register'}
-                                        formData={this.state.formData}
-                                        handleUserFromSubmit={this.handleFormSubmit.bind(this)}
-                                        handleFormChange={this.handleFormUserChange.bind(this)}
                                         isAuthenticated={this.state.isAuthenticated}
+                                        loginUser={this.loginUser.bind(this)}
                                     />
                                 )} />
                                 <Route exact path='/login' render={() => (
                                     <Form
                                         formType={'Login'}
-                                        formData={this.state.formData}
-                                        handleUserFromSubmit={this.handleFormSubmit.bind(this)}
-                                        handleFormChange={this.handleFormUserChange.bind(this)}
                                         isAuthenticated={this.state.isAuthenticated}
+                                        loginUser={this.loginUser.bind(this)}
                                     />
                                 )} />
                                 <Route exact path='/logout' render={() => (
