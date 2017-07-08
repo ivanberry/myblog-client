@@ -97,10 +97,10 @@ class App extends Component {
                 });
                 console.log(this.state);
                 this.getUsers();
-        })
+            })
             .catch((err) => {
                 console.log(err);
-        })
+            })
     }
 
     logoutUser() {
@@ -131,11 +131,7 @@ class App extends Component {
                             <br />
                             <Switch>
                                 <Route exact path='/' render={() => (
-                                    <div>
-                                        <h1>All Users</h1>
-                                        <hr /><br />
-                                        <UsersList users={this.state.users} />
-                                    </div>
+                                    <UsersList users={this.state.users} />
                                 )} />
                                 <Route exact path='/about' component={About} />
                                 <Route exact path='/register' render={() => (
@@ -155,7 +151,7 @@ class App extends Component {
                                         handleFormChange={this.handleFormUserChange.bind(this)}
                                         isAuthenticated={this.state.isAuthenticated}
                                     />
-                                )}/>
+                                )} />
                                 <Route exact path='/logout' render={() => (
                                     <Logout
                                         logoutUser={this.logoutUser.bind(this)}
