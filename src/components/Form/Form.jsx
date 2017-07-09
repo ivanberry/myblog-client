@@ -64,8 +64,8 @@ class Form extends Component {
     }
 
     initRules() {
-        const rules = this.state.formData;
-        for (let rule in rules) {
+        const rules = this.state.formRules;
+        for (const rule of rules) {
             rule.valid = false;
         }
         this.setState({ formRules: rules })
