@@ -1,7 +1,6 @@
 import React from 'react';
 
 const UsersList = (props) => {
-  debugger;
   return (
     <div>
       <h1>All Users</h1>

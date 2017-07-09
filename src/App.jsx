@@ -8,7 +8,7 @@ import UsersList from './components/User/UsersList';
 // import AddUser from './components/User/AddUser';
 import About from './components/About';
 import NavBar from './components/NavBar';
-import Form from './components/Form';
+import Form from './components/Form/Form';
 import Logout from './components/Logout';
 import UserStatus from './components/UserStatus';
 
@@ -69,7 +69,7 @@ class App extends Component {
                                 <Route exact path='/about' component={About} />
                                 <Route exact path='/register' render={() => (
                                     <Form
-                                        formType={'Register'}
+                                        formType={'register'}
                                         isAuthenticated={this.state.isAuthenticated}
                                         loginUser={this.loginUser.bind(this)}
                                     />
