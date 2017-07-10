@@ -6,11 +6,11 @@ import axios from 'axios';
 //import './index.css';
 import UsersList from './components/User/UsersList';
 // import AddUser from './components/User/AddUser';
-import About from './components/About';
-import NavBar from './components/NavBar';
+import About from './components/Common/About';
+import NavBar from './components/Common/NavBar';
 import Form from './components/Form/Form';
-import Logout from './components/Logout';
-import UserStatus from './components/UserStatus';
+import Logout from './components/Common/Logout';
+import UserStatus from './components/User/UserStatus';
 
 class App extends Component {
     // eslint-disable-next-line
