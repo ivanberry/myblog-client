@@ -10,17 +10,32 @@ class Article extends Component {
         }
     }
 
+    componentDidMount() {
+        this.renderMark();
+    }
+
+    renderMark() {
+        let marked = require('marked');
+        let _article = marked('I am using __marked__.');
+        this.setState({
+            article: _article
+        });
+    }
+
     render() {
         return (
-            <section>
-                <h1>Add New Article</h1>
-                <div>
-                    <button>编辑</button>
-                    <button>预览</button>
-                </div>
-                <textarea required rows='20' cols='100' placeholder='Hi, do some write?'></textarea>
-            </section>
-
+            <main>
+                <section>
+                    <h1>Add New Article</h1>
+                    <div>
+                        <button>编辑</button>
+                        <button>预览</button>
+                    </div>
+                    <textarea required rows='20' cols='100' placeholder='Hi, do some write?'></textarea>
+                    <button>提交</button>
+                </section>
+                <section dangerouslySetInnerHTML={{__html: this.state.article}}></section>
+            </main>
         )
     }
 
