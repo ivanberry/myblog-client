@@ -11,6 +11,7 @@ import NavBar from './components/Common/NavBar';
 import Form from './components/Form/Form';
 import Logout from './components/Common/Logout';
 import UserStatus from './components/User/UserStatus';
+import Article from './components/Articles/Article';
 
 class App extends Component {
     // eslint-disable-next-line
@@ -92,6 +93,9 @@ class App extends Component {
                                         isAuthenticated={this.state.isAuthenticated}
                                     />
                                 )} />
+                                <Route exact path='/article' render={() => (
+                                    <Article />
+                                )}
                                 />
                             </Switch>
                         </div>
@@ -100,7 +104,6 @@ class App extends Component {
             </div>
         )
     }
-
 }
 
 export default App
