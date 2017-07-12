@@ -22,18 +22,21 @@ class Editor extends Component {
     }
 
     handlerUserSubmit() {
+        if (!this.props.isAuthenticated) {
+            console.log('not allowed');
+            return false;
+        }
         axios.post(`${process.env.REACT_APP_USERS_SERVICE}/articles`, {
-            body: 'title',
+            body: JSON.stringify(this.state.content),
             title: 'title',
             user_id: 1
         })
             .then((res) => {
-                console.log(res);
+                this.setState({
+                    message: res.data.message
+                })
             }).catch((err) => {
                 console.log(err);
-                // this.setState({
-                //     message: err.data.message
-                // })
             });
     }
 

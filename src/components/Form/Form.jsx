@@ -89,8 +89,16 @@ class Form extends Component {
             rule.valid = false;
         }
 
+        debugger;
+
         //diff register username spec
-        if (formData.username && formData.username.length > 5) rules[0].valid = true;
+        if (this.props.formType === 'register' && formData.username && formData.username.length > 5) {
+            rules[0].valid = true;
+        } else {
+
+            //TODO: once in login router, we dont validate the username
+            rules[0].valid = true;
+        }
 
         if (formData.email.length > 10) rules[1].valid = true;
         if (this.validateEmail(formData.email)) rules[2].valid = true;
