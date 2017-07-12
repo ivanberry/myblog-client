@@ -13,7 +13,7 @@ class Article extends Component {
     render() {
         return (
             <Editor
-                isAuthenticated={this.state.isAuthenticated}
+                isAuthenticated={this.props.isAuthenticated}
             />
         )
     }
