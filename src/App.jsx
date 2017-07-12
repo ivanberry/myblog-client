@@ -77,7 +77,7 @@ class App extends Component {
                                 )} />
                                 <Route exact path='/login' render={() => (
                                     <Form
-                                        formType={'Login'}
+                                        formType={'login'}
                                         isAuthenticated={this.state.isAuthenticated}
                                         loginUser={this.loginUser.bind(this)}
                                     />
@@ -93,7 +93,7 @@ class App extends Component {
                                         isAuthenticated={this.state.isAuthenticated}
                                     />
                                 )} />
-                                <Route exact path='/article' render={() => (
+                                <Route exact path='/articles' render={() => (
                                     <Article
                                         isAuthenticated={this.state.isAuthenticated}
                                     />
