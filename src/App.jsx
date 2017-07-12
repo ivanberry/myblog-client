@@ -94,7 +94,9 @@ class App extends Component {
                                     />
                                 )} />
                                 <Route exact path='/article' render={() => (
-                                    <Article />
+                                    <Article
+                                        isAuthenticated={this.state.isAuthenticated}
+                                    />
                                 )}
                                 />
                             </Switch>
