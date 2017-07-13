@@ -14,6 +14,10 @@ class Article extends Component {
     }
 
     componentDidMount() {
+        this.getAllArticles();
+    }
+
+    getAllArticles() {
         if (this.props.isAuthenticated) {
             axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/articles`)
                 .then((res) => {
@@ -26,7 +30,7 @@ class Article extends Component {
                     console.log(err);
                 })
         } else {
-            
+
         }
     }
 
@@ -34,6 +38,7 @@ class Article extends Component {
         this.setState({
             status: !this.state.status
         });
+        !this.state.status && this.getAllArticles();
     }
 
     render() {
@@ -46,8 +51,8 @@ class Article extends Component {
                             this.state.articles.map((article, index) => {
                                 return (
                                     <section key={index}>
-                                        <h1>{article.titcle}</h1>
-                                        <div>{article.body}</div>
+                                        <h1>{article.title}</h1>
+                                        <div dangerouslySetInnerHTML={{ __html: JSON.parse(article.body) }}></div>
                                         <br />
                                         <p>{article.pub_at}</p>
                                     </section>
