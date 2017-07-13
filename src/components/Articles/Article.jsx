@@ -14,16 +14,20 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/articles`)
-            .then((res) => {
-                console.log(res.data);
-                this.setState({
-                    articles: res.data.data.articles
+        if (this.props.isAuthenticated) {
+            axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/articles`)
+                .then((res) => {
+                    console.log(res.data);
+                    this.setState({
+                        articles: res.data.data.articles
+                    })
                 })
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+                .catch((err) => {
+                    console.log(err);
+                })
+        } else {
+            
+        }
     }
 
     handlerUserClick() {
@@ -39,12 +43,12 @@ class Article extends Component {
                 {this.state.status &&
                     <main>
                         {
-                            this.state.articles.map((article) => {
+                            this.state.articles.map((article, index) => {
                                 return (
-                                    <section>
+                                    <section key={index}>
                                         <h1>{article.titcle}</h1>
                                         <div>{article.body}</div>
-                                        <br/>
+                                        <br />
                                         <p>{article.pub_at}</p>
                                     </section>
                                 )
