@@ -89,8 +89,6 @@ class Form extends Component {
             rule.valid = false;
         }
 
-        debugger;
-
         //diff register username spec
         if (this.props.formType === 'register' && formData.username && formData.username.length > 5) {
             rules[0].valid = true;

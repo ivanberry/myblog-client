@@ -26,8 +26,8 @@ class Editor extends Component {
             console.log('not allowed');
             return false;
         }
-        axios.post(`${process.env.REACT_APP_USERS_SERVICE}/articles`, {
-            body: JSON.stringify(this.state.content),
+        axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/articles`, {
+            body: JSON.stringify(this.state.body),
             title: 'title',
             user_id: 1
         })
@@ -40,12 +40,16 @@ class Editor extends Component {
             });
     }
 
+    handlerUserUpload() {
+
+    }
+
     renderMarked(event) {
         let _marked = require('marked');
         let target = event.target;
         let _content = _marked(target.value);
         this.setState({
-            content: _content
+            body: _content
         });
     }
 
@@ -54,13 +58,9 @@ class Editor extends Component {
             <main className="editor-container">
                 <section className="editor-wrap">
                     <textarea className="editor_edit" name="" id="" cols="100" rows="30" placeholder="Want to leave something?" onChange={this.renderMarked.bind(this)}></textarea>
-                    <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
+                    <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
                 </section>
                 <button className="button" type="sumnit" onClick={this.handlerUserSubmit.bind(this)}>保存</button>
-
-                <pre>
-                    {this.state.message}
-                </pre>
             </main>
         )
     }
