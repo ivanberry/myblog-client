@@ -89,7 +89,7 @@ class Editor extends Component {
     renderMarked(event) {
         let _marked = require('marked');
         let target = event.target;
-        let _content = _marked(target.value);
+        let _content = _marked(target.innerText);
         this.setState({
             body: _content
         });
@@ -99,7 +99,7 @@ class Editor extends Component {
         return (
             <main className="editor-container">
                 <section className="editor-wrap">
-                    <textarea className="editor_edit" name="" id="" cols="100" rows="30" placeholder="Want to leave something?" onChange={this.renderMarked.bind(this)}></textarea>
+                    <div className="editor_edit" name="" id="" contentEditable="true"  onKeyUp={this.renderMarked.bind(this)}></div>
                     <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
                 </section>
                 <input type="file" onChange={(event) => this.handlerFilesChange(event)} />

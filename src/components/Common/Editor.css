@@ -25,6 +25,7 @@
 .marked-container_preview {
     flex: 1;
     flex-basis: 50%;
+    height: 500px;
 }
 
 .marked-container_preview {
