@@ -13,7 +13,12 @@ class Editor extends Component {
         this.state = {
             body: '',
             title: 'Test',
-            message: ''
+            message: '',
+            q_token: '',
+            q_file: null,
+            Q_UPLOAD_URL: 'http://up-z2.qiniu.com/',
+            default_upload_domain: 'http://ot0199r6d.bkt.clouddn.com/',
+            q_back_src: ''
         }
     }
 
@@ -42,6 +47,43 @@ class Editor extends Component {
 
     handlerUserUpload() {
 
+        let formData = new FormData();
+        let that = this;
+
+        formData.append('key', new Date().getTime() + '_' + this.state.q_file[0].name);
+        formData.append('file', this.state.q_file[0]);
+        formData.append('token', this.state.q_token);
+
+        //post to qiniu, formData, key, token, file
+        const url = this.state.Q_UPLOAD_URL;
+
+        axios.post(url, formData)
+            .then((res) => {
+                that.setState({
+                    q_back_src: that.state.default_upload_domain + res.data.key
+                });
+            });
+    }
+
+    handlerFilesChange(event) {
+        let files = event.target.files;
+        this.setState({
+            q_file: files
+        });
+    }
+
+    getUploadToken() {
+        var that = this;
+        //get upload token from application server
+        axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/auth/qiniu`)
+            .then((res) => {
+                that.setState({
+                    q_token: res.data.q_token
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     renderMarked(event) {
@@ -60,7 +102,11 @@ class Editor extends Component {
                     <textarea className="editor_edit" name="" id="" cols="100" rows="30" placeholder="Want to leave something?" onChange={this.renderMarked.bind(this)}></textarea>
                     <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
                 </section>
+                <input type="file" onChange={(event) => this.handlerFilesChange(event)} />
                 <button className="button" type="sumnit" onClick={this.handlerUserSubmit.bind(this)}>保存</button>
+                <button onClick={this.handlerUserUpload.bind(this)} >上传</button>
+                <button onClick={this.getUploadToken.bind(this)}>获取上传token</button>
+                <img src={this.state.q_back_src} alt="image from QINIU"/>
             </main>
         )
     }
