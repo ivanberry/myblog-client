@@ -46,12 +46,11 @@ class Editor extends Component {
     }
 
     handlerUserUpload() {
-
         let formData = new FormData();
         let that = this;
 
-        formData.append('key', new Date().getTime() + '_' + this.state.q_file[0].name);
-        formData.append('file', this.state.q_file[0]);
+        formData.append('key', new Date().getTime() + '_' + this.state.q_file.name);
+        formData.append('file', this.state.q_file);
         formData.append('token', this.state.q_token);
 
         //post to qiniu, formData, key, token, file
@@ -95,11 +94,22 @@ class Editor extends Component {
         });
     }
 
+    uploadPasteImage(event) {
+        let file = event.clipboardData.files[0];
+        console.log(file);
+
+        this.setState({
+            q_file: file
+        },
+            this.handlerUserUpload
+        );
+    }
+
     render() {
         return (
             <main className="editor-container">
                 <section className="editor-wrap">
-                    <div className="editor_edit" name="" id="" contentEditable="true"  onKeyUp={this.renderMarked.bind(this)}></div>
+                    <div className="editor_edit" name="" id="" contentEditable="true" onPaste={this.uploadPasteImage.bind(this)} onKeyUp={this.renderMarked.bind(this)}></div>
                     <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
                 </section>
                 <input type="file" onChange={(event) => this.handlerFilesChange(event)} />
