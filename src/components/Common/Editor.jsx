@@ -105,8 +105,12 @@ class Editor extends Component {
                 <input type="file" onChange={(event) => this.handlerFilesChange(event)} />
                 <button className="button" type="sumnit" onClick={this.handlerUserSubmit.bind(this)}>保存</button>
                 <button onClick={this.handlerUserUpload.bind(this)} >上传</button>
-                <button onClick={this.getUploadToken.bind(this)}>获取上传token</button>
-                <img src={this.state.q_back_src} alt="image from QINIU"/>
+                {this.props.isAuthenticated &&
+                    <button onClick={this.getUploadToken.bind(this)}>获取上传token</button>
+                }
+                <div>
+                    <img src={this.state.q_back_src} alt="image from QINIU" />
+                </div>
             </main>
         )
     }
