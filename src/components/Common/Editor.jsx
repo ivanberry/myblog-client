@@ -18,7 +18,8 @@ class Editor extends Component {
             q_file: null,
             Q_UPLOAD_URL: 'http://up-z2.qiniu.com/',
             default_upload_domain: 'http://ot0199r6d.bkt.clouddn.com/',
-            q_back_src: ''
+            q_back_src: '',
+            paste_event: null
         }
     }
 
@@ -45,24 +46,7 @@ class Editor extends Component {
             });
     }
 
-    handlerUserUpload() {
-        let formData = new FormData();
-        let that = this;
 
-        formData.append('key', new Date().getTime() + '_' + this.state.q_file.name);
-        formData.append('file', this.state.q_file);
-        formData.append('token', this.state.q_token);
-
-        //post to qiniu, formData, key, token, file
-        const url = this.state.Q_UPLOAD_URL;
-
-        axios.post(url, formData)
-            .then((res) => {
-                that.setState({
-                    q_back_src: that.state.default_upload_domain + res.data.key
-                });
-            });
-    }
 
     handlerFilesChange(event) {
         let files = event.target.files;
@@ -95,31 +79,56 @@ class Editor extends Component {
     }
 
     uploadPasteImage(event) {
-        let file = event.clipboardData.files[0];
-        console.log(file);
 
-        this.setState({
-            q_file: file
-        },
-            this.handlerUserUpload
-        );
+        event.persist();
+        let file = event.clipboardData.files[0];
+
+        if (file && /^image/g.test(file.type)) {
+            this.setState({
+                q_file: file,
+                paste_event: event
+            }, () => {
+                this.handlerUserUpload(event)
+            });
+        }
+    }
+
+    handlerUserUpload(event) {
+
+        let formData = new FormData();
+        let that = this;
+
+        formData.append('key', new Date().getTime() + '_' + this.state.q_file.name);
+        formData.append('file', this.state.q_file);
+        formData.append('token', this.state.q_token);
+
+        //post to qiniu, formData, key, token, file
+        const url = this.state.Q_UPLOAD_URL;
+
+        axios.post(url, formData)
+            .then((res) => {
+                that.setState({
+                    q_back_src: that.state.default_upload_domain + res.data.key + '-thumb'
+                }, () => {
+                    event.clipboardData.setData('text/plain', 'Hello paste')
+                });
+            });
     }
 
     render() {
         return (
             <main className="editor-container">
                 <section className="editor-wrap">
-                    <div className="editor_edit" name="" id="" contentEditable="true" onPaste={this.uploadPasteImage.bind(this)} onKeyUp={this.renderMarked.bind(this)}></div>
+                    <div className="editor_edit" name="" id="" contentEditable="true" onPaste={(event) => this.uploadPasteImage(event)} onKeyUp={this.renderMarked.bind(this)}></div>
                     <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
                 </section>
                 <input type="file" onChange={(event) => this.handlerFilesChange(event)} />
                 <button className="button" type="sumnit" onClick={this.handlerUserSubmit.bind(this)}>保存</button>
-                <button onClick={this.handlerUserUpload.bind(this)} >上传</button>
-                {this.props.isAuthenticated &&
+                {!this.props.isAuthenticated &&
                     <button onClick={this.getUploadToken.bind(this)}>获取上传token</button>
                 }
                 <div>
-                    <img src={this.state.q_back_src} alt="image from QINIU" />
+                    <img className="hidden" src={this.state.q_back_src} alt="QINIU" />
                 </div>
             </main>
         )
