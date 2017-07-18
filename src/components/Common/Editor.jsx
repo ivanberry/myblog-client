@@ -24,7 +24,7 @@ class Editor extends Component {
     }
 
     componentDidMount() {
-        this.getUploadToken()
+        this.props.isAuthenticated && this.getUploadToken()
     }
 
     handlerUserSubmit() {
@@ -44,15 +44,6 @@ class Editor extends Component {
             }).catch((err) => {
                 console.log(err);
             });
-    }
-
-
-
-    handlerFilesChange(event) {
-        let files = event.target.files;
-        this.setState({
-            q_file: files
-        });
     }
 
     getUploadToken() {
@@ -110,7 +101,7 @@ class Editor extends Component {
         axios.post(url, formData)
             .then((res) => {
                 that.setState({
-                    q_back_src: that.state.default_upload_domain + res.data.key + '-thumb'
+                    q_back_src: that.state.default_upload_domain + `${res.data.key}-thumb`,
                 }, () => {
                     //eslint-disable-next-line
                     let image_st = `![xxx](${this.state.q_back_src})`;
@@ -127,11 +118,7 @@ class Editor extends Component {
                     <div className="editor_edit" name="" id="editor" contentEditable="true" onPaste={(event) => this.uploadPasteImage(event)} onKeyUp={this.renderMarked.bind(this)}></div>
                     <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
                 </section>
-                <input type="file" onChange={(event) => this.handlerFilesChange(event)} />
                 <button className="button" type="sumnit" onClick={this.handlerUserSubmit.bind(this)}>保存</button>
-                {!this.props.isAuthenticated &&
-                    <button onClick={this.getUploadToken.bind(this)}>获取上传token</button>
-                }
             </main>
         )
     }
