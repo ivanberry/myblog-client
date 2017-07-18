@@ -24,7 +24,7 @@ class Editor extends Component {
     }
 
     componentDidMount() {
-
+        this.getUploadToken()
     }
 
     handlerUserSubmit() {
@@ -95,6 +95,8 @@ class Editor extends Component {
 
     handlerUserUpload(event) {
 
+        // event.preventDefault();
+
         let formData = new FormData();
         let that = this;
 
@@ -110,7 +112,10 @@ class Editor extends Component {
                 that.setState({
                     q_back_src: that.state.default_upload_domain + res.data.key + '-thumb'
                 }, () => {
-                    event.clipboardData.setData('text/plain', 'Hello paste')
+                    //eslint-disable-next-line
+                    let image_st = `![xxx](${this.state.q_back_src})`;
+                    document.getElementById('editor').insertAdjacentText('beforeend', image_st);
+                    document.execCommand('copy');
                 });
             });
     }
@@ -119,7 +124,7 @@ class Editor extends Component {
         return (
             <main className="editor-container">
                 <section className="editor-wrap">
-                    <div className="editor_edit" name="" id="" contentEditable="true" onPaste={(event) => this.uploadPasteImage(event)} onKeyUp={this.renderMarked.bind(this)}></div>
+                    <div className="editor_edit" name="" id="editor" contentEditable="true" onPaste={(event) => this.uploadPasteImage(event)} onKeyUp={this.renderMarked.bind(this)}></div>
                     <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
                 </section>
                 <input type="file" onChange={(event) => this.handlerFilesChange(event)} />
@@ -127,9 +132,6 @@ class Editor extends Component {
                 {!this.props.isAuthenticated &&
                     <button onClick={this.getUploadToken.bind(this)}>获取上传token</button>
                 }
-                <div>
-                    <img className="hidden" src={this.state.q_back_src} alt="QINIU" />
-                </div>
             </main>
         )
     }
