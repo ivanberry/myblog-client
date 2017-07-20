@@ -60,8 +60,8 @@ class App extends Component {
                     isAuthenticated={this.state.isAuthenticated}
                 />
                 <div className="contaienr">
-                    <div className="row">
-                        <div className="col-md-4">
+                    <div className="">
+                        <div className="">
                             <br />
                             <Switch>
                                 <Route exact path='/' render={() => (
