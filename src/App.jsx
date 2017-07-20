@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-//import App from './App';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //import registerServiceWorker from './registerServiceWorker';
-//import './index.css';
 import UsersList from './components/User/UsersList';
 // import AddUser from './components/User/AddUser';
 import About from './components/Common/About';
@@ -12,6 +11,7 @@ import Form from './components/Form/Form';
 import Logout from './components/Common/Logout';
 import UserStatus from './components/User/UserStatus';
 import Article from './components/Articles/Article';
+import './components/Common/Main.css'
 
 class App extends Component {
     // eslint-disable-next-line
@@ -55,10 +55,12 @@ class App extends Component {
     render() {
         return (
             <div>
-                <NavBar
-                    title={this.state.title}
-                    isAuthenticated={this.state.isAuthenticated}
-                />
+                <MuiThemeProvider>
+                    <NavBar
+                        title={this.state.title}
+                        isAuthenticated={this.state.isAuthenticated}
+                    />
+                </MuiThemeProvider>
                 <div className="contaienr">
                     <div className="row">
                         <div className="col-md-4">

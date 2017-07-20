@@ -1,8 +1,15 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import AppBar from 'material-ui/AppBar';
+
 
 const NavBar = (props) => (
+  <div>
+    <AppBar
+      title="Title"
+      iconClassNameRight="muidocs-icon-navigation-expand-more"
+    />  
   <Navbar inverse collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
@@ -49,6 +56,7 @@ const NavBar = (props) => (
       </Nav>
     </Navbar.Collapse>
   </Navbar>
+  </div>
 )
 
 export default NavBar
