@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import FormErrors from './FormErrors';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
+
 
 //turn props to self state
 import axios from 'axios';
@@ -174,40 +178,45 @@ class Form extends Component {
                     {/*//这是什么鬼？*/}
                     {this.props.formType === 'register' &&
                         <div>
-                            <input
+                            <TextField
                                 name='username'
                                 type='text'
-                                placeholder='Enter a username'
+                                hintText='Enter a username'
                                 required
                                 value={this.state.formData.username}
                                 onChange={this.handleFormChange.bind(this)}
+                                floatingLabelText='用户名'
                             />
                         </div>
                     }
                     <div>
-                        <input
+                        <TextField
                             name='email'
                             type="email"
-                            placeholder='Enter your email'
+                            hintText='Enter your email'
                             required
                             value={this.state.formData.email}
                             onChange={this.handleFormChange.bind(this)}
+                            floatingLabelText='邮箱'
                         />
                     </div>
                     <div>
-                        <input
+                        <TextField
                             name='password'
                             type="password"
-                            placeholder='Enter your password'
+                            hintText='Enter your password'
                             required
                             value={this.state.formData.password}
                             onChange={this.handleFormChange.bind(this)}
+                            floatingLabelText='密码'
                         />
                     </div>
-                    <input
+                    <RaisedButton
                         disabled={!this.state.valid}
                         type="submit"
                         value='Submit'
+                        label="注册"
+                        primary={true}
                     />
                 </form>
             </div>

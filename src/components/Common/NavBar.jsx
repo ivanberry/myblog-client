@@ -1,56 +1,95 @@
-import React from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import Toggle from 'material-ui/Toggle';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
-import './NavBar.css';
+let injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
 
-const NavBar = (props) => (
-  <Navbar inverse collapseOnSelect>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <span>{props.title}</span>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar.Header>
-    <Navbar.Collapse>
-      <Nav>
-        <LinkContainer to="/">
-          <NavItem eventKey={1}>Home</NavItem>
-        </LinkContainer>
-        <LinkContainer to="/about">
-          <NavItem eventKey={2}>About</NavItem>
-        </LinkContainer>
-        {props.isAuthenticated &&
-          <LinkContainer to="/status">
-            <NavItem eventKey={3}>User Status</NavItem>
-          </LinkContainer>
+class Login extends Component {
+  static muiName = 'FlatButton';
+
+  render() {
+    return (
+      <Link to="/login">
+        <FlatButton {...this.props} label="登录" />
+      </Link>
+    );
+  }
+}
+
+const Logged = (props) => (
+  <IconMenu
+    {...props}
+    iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+    targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+  >
+  </IconMenu>
+);
+
+Logged.muiName = 'IconMenu';
+
+/**
+ * render different components depending on the application state
+ * @param {} props 
+ */
+class NavBar extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      logged: false
+    }
+  }
+
+  handleChange = (event, logged) => {
+    this.setState({
+      logged: logged
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <AppBar
+          title="Shirting.me"
+          iconElementRight={this.state.logged ? <Logged /> : <Login />}
+        />
+
+        <Toggle
+          label="Logged"
+          defaultToggled={false}
+          onToggle={this.handleChange}
+          labelPosition="right"
+          style={{ margin: 20 }}
+        />
+
+        <Link to='/'>主页</Link>
+        <Link to='/about'>关于</Link>
         }
-      </Nav>
-      <Nav pullRight>
-        {!props.isAuthenticated &&
-          <LinkContainer to="/register">
-            <NavItem eventKey={1}>Register</NavItem>
-          </LinkContainer>
+        {!this.props.isAuthenticated &&
+          <Link to="/register">注册</Link>
         }
-        {!props.isAuthenticated &&
-          <LinkContainer to="/login">
-            <NavItem eventKey={2}>Log In</NavItem>
-          </LinkContainer>
+        {!this.props.isAuthenticated &&
+          <Link to="/login">登录</Link>
         }
-        {props.isAuthenticated &&
-          <LinkContainer to="/logout">
-            <NavItem eventKey={3}>Log Out</NavItem>
-          </LinkContainer>
+        {this.props.isAuthenticated &&
+          <Link to="/logout">退出</Link>
         }
         {
-          props.isAuthenticated &&
-          <LinkContainer to="/articles">
-            <NavItem eventKey={4}>Articles</NavItem>
-          </LinkContainer>
+          this.props.isAuthenticated &&
+          <Link to="/articles">文章</Link>
         }
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
-)
+      </div>
+    );
+  }
+}
 
 export default NavBar
