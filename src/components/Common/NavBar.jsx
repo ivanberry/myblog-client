@@ -73,7 +73,6 @@ class NavBar extends Component {
 
         <Link to='/'>主页</Link>
         <Link to='/about'>关于</Link>
-        }
         {!this.props.isAuthenticated &&
           <Link to="/register">注册</Link>
         }
