@@ -62,48 +62,44 @@ class App extends Component {
                         isAuthenticated={this.state.isAuthenticated}
                     />
                     <div className="contaienr">
-                        <div className="row">
-                            <div className="col-md-4">
-                                <br />
-                                <Switch>
-                                    <Route exact path='/' render={() => (
-                                        <UsersList users={this.state.users} />
-                                    )} />
-                                    <Route exact path='/about' component={About} />
-                                    <Route exact path='/register' render={() => (
-                                        <Form
-                                            formType={'register'}
-                                            isAuthenticated={this.state.isAuthenticated}
-                                            loginUser={this.loginUser.bind(this)}
-                                        />
-                                    )} />
-                                    <Route exact path='/login' render={() => (
-                                        <Form
-                                            formType={'login'}
-                                            isAuthenticated={this.state.isAuthenticated}
-                                            loginUser={this.loginUser.bind(this)}
-                                        />
-                                    )} />
-                                    <Route exact path='/logout' render={() => (
-                                        <Logout
-                                            logoutUser={this.logoutUser.bind(this)}
-                                            isAuthenticated={this.state.isAuthenticated}
-                                        />
-                                    )} />
-                                    <Route exact path='/status' render={() => (
-                                        <UserStatus
-                                            isAuthenticated={this.state.isAuthenticated}
-                                        />
-                                    )} />
-                                    <Route exact path='/articles' render={() => (
-                                        <Article
-                                            isAuthenticated={this.state.isAuthenticated}
-                                        />
-                                    )}
-                                    />
-                                </Switch>
-                            </div>
-                        </div>
+                        <br />
+                        <Switch>
+                            <Route exact path='/' render={() => (
+                                <UsersList users={this.state.users} />
+                            )} />
+                            <Route exact path='/about' component={About} />
+                            <Route exact path='/register' render={() => (
+                                <Form
+                                    formType={'register'}
+                                    isAuthenticated={this.state.isAuthenticated}
+                                    loginUser={this.loginUser.bind(this)}
+                                />
+                            )} />
+                            <Route exact path='/login' render={() => (
+                                <Form
+                                    formType={'login'}
+                                    isAuthenticated={this.state.isAuthenticated}
+                                    loginUser={this.loginUser.bind(this)}
+                                />
+                            )} />
+                            <Route exact path='/logout' render={() => (
+                                <Logout
+                                    logoutUser={this.logoutUser.bind(this)}
+                                    isAuthenticated={this.state.isAuthenticated}
+                                />
+                            )} />
+                            <Route exact path='/status' render={() => (
+                                <UserStatus
+                                    isAuthenticated={this.state.isAuthenticated}
+                                />
+                            )} />
+                            <Route exact path='/articles' render={() => (
+                                <Article
+                                    isAuthenticated={this.state.isAuthenticated}
+                                />
+                            )}
+                            />
+                        </Switch>
                     </div>
                 </div>
             </MuiThemeProvider>
