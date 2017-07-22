@@ -12,6 +12,7 @@ import Logout from './components/Common/Logout';
 import UserStatus from './components/User/UserStatus';
 import Article from './components/Articles/Article';
 import './components/Common/Main.css'
+import './components/Common/typo.css'
 
 class App extends Component {
     // eslint-disable-next-line
@@ -54,58 +55,58 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <MuiThemeProvider>
+            <MuiThemeProvider>
+                <div>
                     <NavBar
                         title={this.state.title}
                         isAuthenticated={this.state.isAuthenticated}
                     />
-                </MuiThemeProvider>
-                <div className="contaienr">
-                    <div className="row">
-                        <div className="col-md-4">
-                            <br />
-                            <Switch>
-                                <Route exact path='/' render={() => (
-                                    <UsersList users={this.state.users} />
-                                )} />
-                                <Route exact path='/about' component={About} />
-                                <Route exact path='/register' render={() => (
-                                    <Form
-                                        formType={'register'}
-                                        isAuthenticated={this.state.isAuthenticated}
-                                        loginUser={this.loginUser.bind(this)}
+                    <div className="contaienr">
+                        <div className="row">
+                            <div className="col-md-4">
+                                <br />
+                                <Switch>
+                                    <Route exact path='/' render={() => (
+                                        <UsersList users={this.state.users} />
+                                    )} />
+                                    <Route exact path='/about' component={About} />
+                                    <Route exact path='/register' render={() => (
+                                        <Form
+                                            formType={'register'}
+                                            isAuthenticated={this.state.isAuthenticated}
+                                            loginUser={this.loginUser.bind(this)}
+                                        />
+                                    )} />
+                                    <Route exact path='/login' render={() => (
+                                        <Form
+                                            formType={'login'}
+                                            isAuthenticated={this.state.isAuthenticated}
+                                            loginUser={this.loginUser.bind(this)}
+                                        />
+                                    )} />
+                                    <Route exact path='/logout' render={() => (
+                                        <Logout
+                                            logoutUser={this.logoutUser.bind(this)}
+                                            isAuthenticated={this.state.isAuthenticated}
+                                        />
+                                    )} />
+                                    <Route exact path='/status' render={() => (
+                                        <UserStatus
+                                            isAuthenticated={this.state.isAuthenticated}
+                                        />
+                                    )} />
+                                    <Route exact path='/articles' render={() => (
+                                        <Article
+                                            isAuthenticated={this.state.isAuthenticated}
+                                        />
+                                    )}
                                     />
-                                )} />
-                                <Route exact path='/login' render={() => (
-                                    <Form
-                                        formType={'login'}
-                                        isAuthenticated={this.state.isAuthenticated}
-                                        loginUser={this.loginUser.bind(this)}
-                                    />
-                                )} />
-                                <Route exact path='/logout' render={() => (
-                                    <Logout
-                                        logoutUser={this.logoutUser.bind(this)}
-                                        isAuthenticated={this.state.isAuthenticated}
-                                    />
-                                )} />
-                                <Route exact path='/status' render={() => (
-                                    <UserStatus
-                                        isAuthenticated={this.state.isAuthenticated}
-                                    />
-                                )} />
-                                <Route exact path='/articles' render={() => (
-                                    <Article
-                                        isAuthenticated={this.state.isAuthenticated}
-                                    />
-                                )}
-                                />
-                            </Switch>
+                                </Switch>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </MuiThemeProvider>
         )
     }
 }
