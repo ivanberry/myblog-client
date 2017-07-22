@@ -215,7 +215,7 @@ class Form extends Component {
                         disabled={!this.state.valid}
                         type="submit"
                         value='Submit'
-                        label="注册"
+                        label={this.props.formType}
                         primary={true}
                     />
                 </form>

@@ -4,7 +4,6 @@ import axios from 'axios';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //import registerServiceWorker from './registerServiceWorker';
 import UsersList from './components/User/UsersList';
-// import AddUser from './components/User/AddUser';
 import About from './components/Common/About';
 import NavBar from './components/Common/NavBar';
 import Form from './components/Form/Form';
@@ -55,13 +54,13 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <MuiThemeProvider>
-                    <div>
-                        <NavBar
-                            title={this.state.title}
-                            isAuthenticated={this.state.isAuthenticated}
-                        />
+            <MuiThemeProvider>
+                <div>
+                    <NavBar
+                        title={this.state.title}
+                        isAuthenticated={this.state.isAuthenticated}
+                    />
+                    <div className="contaienr">
                         <br />
                         <Switch>
                             <Route exact path='/' render={() => (
@@ -101,8 +100,8 @@ class App extends Component {
                             />
                         </Switch>
                     </div>
-                </MuiThemeProvider>
-            </div>
+                </div>
+            </MuiThemeProvider>
         )
     }
 }
