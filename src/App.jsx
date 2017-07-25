@@ -55,12 +55,12 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider>
-                <div>
+                <div className=''>
                     <NavBar
                         title={this.state.title}
                         isAuthenticated={this.state.isAuthenticated}
                     />
-                    <div className="contaienr">
+                    <div className='flex-container'>
                         <br />
                         <Switch>
                             <Route exact path='/' render={() => (

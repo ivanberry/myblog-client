@@ -1,3 +1,7 @@
 .error {
     color: red;
 }
+
+.validate-list {
+    font-size: 10px;
+}

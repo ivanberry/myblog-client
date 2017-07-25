@@ -2,3 +2,13 @@
     font-family: 'Roboto', sans-serif;
     src: url('//otev0clam.bkt.clouddn.com/Roboto-Regular.ttf');
 }
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#root {
+    min-height: 900px;
+}

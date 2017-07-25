@@ -4,6 +4,8 @@ import FormErrors from './FormErrors';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import './Form.css';
+
 
 
 //turn props to self state
@@ -167,12 +169,11 @@ class Form extends Component {
             return <Redirect to='/' />
         }
         return (
-            <div>
-                <h1>{this.props.formType}</h1>
-                <hr /><br />
+            <div className="form-login-register">
                 <FormErrors
                     formType={this.props.formType}
                     formRules={this.state.formRules}
+                    className='form-error'
                 />
                 <form onSubmit={(event) => this.handleUserFromSubmit(event)}>
                     {/*//这是什么鬼？*/}
