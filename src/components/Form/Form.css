@@ -1,0 +1,17 @@
+.form-login-register {
+    margin: 0 5%;
+    padding-bottom: 8vh;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-content {
+    text-align: center;
+    box-sizing: border-box;
+    padding: 60px;
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 4px;
+    line-height: 1.5rem;
+}

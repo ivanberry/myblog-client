@@ -83,7 +83,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div>
+      <nav>
         <AppBar
           title="Shirting.me"
           iconElementRight={
@@ -92,7 +92,7 @@ class NavBar extends Component {
             />
           }
         />
-      </div>
+      </nav>
     );
   }
 }

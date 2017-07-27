@@ -3,12 +3,9 @@
     src: url('//otev0clam.bkt.clouddn.com/Roboto-Regular.ttf');
 }
 
-.flex-container {
+.main-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-}
-
-#root {
-    min-height: 900px;
+    height: 100vh;
 }
