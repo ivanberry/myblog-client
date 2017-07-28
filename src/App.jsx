@@ -55,7 +55,7 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider>
-                <main className='main-container'>
+                <main className=''>
                     <NavBar
                         title={this.state.title}
                         isAuthenticated={this.state.isAuthenticated}

@@ -169,61 +169,63 @@ class Form extends Component {
             return <Redirect to='/' />
         }
         return (
-            <div className="form-login-register">
-                {/*<FormErrors
+            <div className='main-container'>
+                <div className="form-login-register">
+                    {/*<FormErrors
                     formType={this.props.formType}
                     formRules={this.state.formRules}
                     className='form-error'
                 />*/}
-                <section className="form-content">
+                    <section className="form-content">
 
-                    <header>Create Your New Account</header>
-                    <form onSubmit={(event) => this.handleUserFromSubmit(event)}>
-                        {this.props.formType === 'register' &&
+                        <header>Create Your New Account</header>
+                        <form onSubmit={(event) => this.handleUserFromSubmit(event)}>
+                            {this.props.formType === 'register' &&
 
+                                <div>
+                                    <TextField
+                                        name='username'
+                                        type='text'
+                                        hintText='Enter a username'
+                                        required
+                                        value={this.state.formData.username}
+                                        onChange={this.handleFormChange.bind(this)}
+                                        floatingLabelText='用户名'
+                                    />
+                                </div>
+                            }
                             <div>
                                 <TextField
-                                    name='username'
-                                    type='text'
-                                    hintText='Enter a username'
+                                    name='email'
+                                    type="email"
+                                    hintText='Enter your email'
                                     required
-                                    value={this.state.formData.username}
+                                    value={this.state.formData.email}
                                     onChange={this.handleFormChange.bind(this)}
-                                    floatingLabelText='用户名'
+                                    floatingLabelText='邮箱'
                                 />
                             </div>
-                        }
-                        <div>
-                            <TextField
-                                name='email'
-                                type="email"
-                                hintText='Enter your email'
-                                required
-                                value={this.state.formData.email}
-                                onChange={this.handleFormChange.bind(this)}
-                                floatingLabelText='邮箱'
+                            <div>
+                                <TextField
+                                    name='password'
+                                    type="password"
+                                    hintText='Enter your password'
+                                    required
+                                    value={this.state.formData.password}
+                                    onChange={this.handleFormChange.bind(this)}
+                                    floatingLabelText='密码'
+                                />
+                            </div>
+                            <RaisedButton
+                                disabled={!this.state.valid}
+                                type="submit"
+                                value='Submit'
+                                label={this.props.formType}
+                                primary={true}
                             />
-                        </div>
-                        <div>
-                            <TextField
-                                name='password'
-                                type="password"
-                                hintText='Enter your password'
-                                required
-                                value={this.state.formData.password}
-                                onChange={this.handleFormChange.bind(this)}
-                                floatingLabelText='密码'
-                            />
-                        </div>
-                        <RaisedButton
-                            disabled={!this.state.valid}
-                            type="submit"
-                            value='Submit'
-                            label={this.props.formType}
-                            primary={true}
-                        />
-                    </form>
-                </section>
+                        </form>
+                    </section>
+                </div>
             </div>
         )
     }
