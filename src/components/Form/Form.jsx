@@ -178,10 +178,12 @@ class Form extends Component {
                 />*/}
                     <section className="form-content">
 
-                        <header>Create Your New Account</header>
+                        {this.props.formType === 'register' ?
+                            <header>Create Your New Account</header> : 
+                            <header>Welcome</header> 
+                        }
                         <form onSubmit={(event) => this.handleUserFromSubmit(event)}>
                             {this.props.formType === 'register' &&
-
                                 <div>
                                     <TextField
                                         name='username'
