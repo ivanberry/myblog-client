@@ -9,7 +9,8 @@ class Article extends Component {
         super(props);
         this.state = {
             status: true,
-            articles: []
+            articles: [],
+            isPreview: false
         }
     }
 
@@ -41,10 +42,18 @@ class Article extends Component {
         !this.state.status && this.getAllArticles();
     }
 
+    toggleEditorPreview() {
+        this.setState({
+            isPreview: !this.state.isPreview
+        });
+        console.log(this.state.isPreview);
+    }
+
     render() {
         return (
             <div>
                 <button onClick={this.handlerUserClick.bind(this)}>Create New Article</button>
+                <button onClick={this.toggleEditorPreview.bind(this)}>Preview</button>
                 {this.state.status &&
                     <main>
                         {
@@ -63,7 +72,8 @@ class Article extends Component {
                 }
                 {!this.state.status &&
                     <Editor
-                        isAuthenticated={this.props.isAuthenticated}
+                    isAuthenticated={this.props.isAuthenticated}
+                    isPreview={this.state.isPreview}
                     />
                 }
             </div>

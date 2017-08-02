@@ -116,7 +116,8 @@ class Editor extends Component {
             <main className="editor-container">
                 <section className="editor-wrap">
                     <div className="editor_edit" name="" id="editor" contentEditable="true" onPaste={(event) => this.uploadPasteImage(event)} onKeyUp={this.renderMarked.bind(this)}></div>
-                    <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
+                    {this.props.isPreview && <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
+                    }
                 </section>
                 <button className="button" type="sumnit" onClick={this.handlerUserSubmit.bind(this)}>保存</button>
             </main>
