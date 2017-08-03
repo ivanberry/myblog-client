@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import './Editor.css';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
 import axios from 'axios';
 
 class Editor extends Component {
@@ -124,7 +126,10 @@ class Editor extends Component {
                     {this.props.isPreview && <div className="marked-container_preview" dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
                     }
                 </section>
-                <button className="button" type="sumnit" onClick={this.handlerUserSubmit.bind(this)}>保存</button>
+                <RaisedButton
+                    label="保存"
+                    onTouchTap={this.handlerUserSubmit.bind(this)}
+                />    
             </main>
         )
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Editor from '../Common/Editor';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import axios from 'axios';
 
@@ -52,8 +53,18 @@ class Article extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.handlerUserClick.bind(this)}>Create New Article</button>
-                <button onClick={this.toggleEditorPreview.bind(this)}>Preview</button>
+                <div>
+                    <RaisedButton
+                        label="创建新的文章"
+                        onTouchTap={this.handlerUserClick.bind(this)}
+                    />
+
+                    <RaisedButton
+                        label="预览"
+                        onTouchTap={this.toggleEditorPreview.bind(this)}
+                    />
+                </div>
+
                 {this.state.status &&
                     <main>
                         {
@@ -72,8 +83,8 @@ class Article extends Component {
                 }
                 {!this.state.status &&
                     <Editor
-                    isAuthenticated={this.props.isAuthenticated}
-                    isPreview={this.state.isPreview}
+                        isAuthenticated={this.props.isAuthenticated}
+                        isPreview={this.state.isPreview}
                     />
                 }
             </div>

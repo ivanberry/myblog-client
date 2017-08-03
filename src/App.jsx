@@ -10,8 +10,8 @@ import Form from './components/Form/Form';
 import Logout from './components/Common/Logout';
 import UserStatus from './components/User/UserStatus';
 import Article from './components/Articles/Article';
-import './components/Common/Main.css'
 import './components/Common/typo.css'
+import './components/Common/Main.css'
 
 class App extends Component {
     // eslint-disable-next-line
