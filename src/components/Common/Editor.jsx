@@ -21,10 +21,15 @@ class Editor extends Component {
             q_back_src: '',
             paste_event: null
         }
+
     }
 
+    style = {
+        height: 100
+    }
     componentDidMount() {
-        this.props.isAuthenticated && this.getUploadToken()
+        this.props.isAuthenticated && this.getUploadToken();
+        console.log(this);
     }
 
     handlerUserSubmit() {
@@ -47,7 +52,7 @@ class Editor extends Component {
     }
 
     getUploadToken() {
-        var that = this;
+        const that = this;
         //get upload token from application server
         axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/auth/qiniu`)
             .then((res) => {
