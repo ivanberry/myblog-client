@@ -10,6 +10,7 @@ import Form from './components/Form/Form';
 import Logout from './components/Common/Logout';
 import UserStatus from './components/User/UserStatus';
 import Article from './components/Articles/Article';
+import Oauth from './components/Common/Oauth';
 import './components/Common/typo.css'
 import './components/Common/Main.css'
 
@@ -61,6 +62,7 @@ class App extends Component {
                         isAuthenticated={this.state.isAuthenticated}
                     />
                     <br />
+                    <Oauth />
                     <Switch>
                         <Route exact path='/' render={() => (
                             <UsersList users={this.state.users} />
