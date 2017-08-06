@@ -62,7 +62,6 @@ class App extends Component {
                         isAuthenticated={this.state.isAuthenticated}
                     />
                     <br />
-                    <Oauth />
                     <Switch>
                         <Route exact path='/' render={() => (
                             <UsersList users={this.state.users} />
